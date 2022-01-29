@@ -1,4 +1,5 @@
 from django.db import models
+from hamsterapp.models import SpeciesModel
 
 
 class HamsterModel(models.Model):
@@ -23,6 +24,7 @@ class HamsterModel(models.Model):
     date_of_birth = models.DateField()
     # Image will be saved to MEDIA_ROOT/hamster_images/2022/01 if saved in january 2022
     image = models.ImageField(upload_to="hamster_images/%Y/%m")
+    species = models.ForeignKey(SpeciesModel, on_delete=models.SET_NULL, null=True)
 
     objects = models.Manager()
 
