@@ -1,0 +1,1 @@
+from hamsterapp.serializers.hamster import HamsterSerializer
