@@ -25,6 +25,8 @@ class HamsterModel(models.Model):
     # Image will be saved to MEDIA_ROOT/hamster_images/2022/01 if saved in january 2022
     image = models.ImageField(upload_to="hamster_images/%Y/%m")
     species = models.ForeignKey(SpeciesModel, on_delete=models.SET_NULL, null=True)
+    hamster_secret = models.TextField(blank=True)
+    height = models.PositiveSmallIntegerField(verbose_name="height (cm)")
 
     objects = models.Manager()
 

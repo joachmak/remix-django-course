@@ -1,2 +1,3 @@
 from hamsterapp.serializers.hamster import HamsterSerializer
 from hamsterapp.serializers.species import SpeciesSerializer
+from hamsterapp.serializers.weight_record import WeightRecordSerializer
