@@ -8,6 +8,7 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 
+
 export const meta: MetaFunction = () => {
   return { title: "Django Remix Course" };
 };
@@ -22,7 +23,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}

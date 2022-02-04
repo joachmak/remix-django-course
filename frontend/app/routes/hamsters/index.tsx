@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "remix";
+import {Link, useLoaderData} from "remix";
 import {getHamsters, Hamster} from "~/modules/hamster";
 
 
@@ -8,7 +8,6 @@ export const loader = async () => {
 
 export default function Posts() {
     const hamsters: Hamster[] = useLoaderData();
-    console.log(hamsters);
     return (
         <>
             <h1>Hamsters</h1>
@@ -22,6 +21,7 @@ export default function Posts() {
                     )
                 }
             </ul>
+            <Link to={"/"}>Home</Link>
         </>
     )
 }
