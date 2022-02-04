@@ -68,3 +68,41 @@ Siden vi foreløpig ikke har så mye logikk i vårt admin-panel, har vi ikke lag
 
 Registrer gjerne noen weight records ved hjelp av admin-panelet før du går videre!
 
+Nå vil du for første gang se effekten av de ulike feltene du deklarerte i `WeightRecordModel`. Du ser for eksempel at `__str__()`-metoden returnerer teksten som beskriver hver registrert weight record i liste-visningen i admin-panelet. `verbose_name_plural` er navnet til den nye admin-seksjonen. Se gjerne over [django-dokumentasjonen for Meta-options](https://docs.djangoproject.com/en/4.0/ref/models/options/).
+
+### Oppgave 1c) - Serializer
+
+Når man sender en request til et API, hender det at man inkluderer litt data (f.eks. med en POST-request), eller at man ønsker å motta data (GET) fra APIet. Dataen blir gjerne sendt frem og tilbake mellom klient og server i JSON-format. Til nå har vi bare jobbet med Django-modeller, som er vanlige Python-klasser. Hvordan skal vi oversette JSON-data til Django-modeller, og motsatt? 
+
+Anta at vi mottar en GET-request som vil hente ut alle weight records fra databasen vår. Hver weight record er representert av et Python-objekt av klassen `Model`. Vi må - på en eller annen måte - konvertere våre Python-objekter til JSON for å kunne sende dem til klienten. Python har vel et innebygd json-bibliotek som kan konvertere objekter til JSON, men våre modeller er ganske kompliserte objekter, så det hadde vært ganske tungvint. Heldigvis har vi _serializers_!
+
+Her er et bilde av en ekte serializer:
+
+<img src="https://user-images.githubusercontent.com/55885044/152545187-b9d77923-3bdb-4ccc-ab9a-f0c8c01cba46.png" width="250px" />
+
+En serializer hjelper oss nemlig med svært mye forskjellig.
+- Konvertering av JSON-data til Django Models
+- Konvertering av Django Models til gyldig data som kan sendes i en `Response`
+- Validering av data, slik at vi ikke lagrer ugyldig data og "roter til" databasen vår (+ automatisk generering av forholdsvis intuitive feilmeldinger hvis det oppstår feil)
+- Filtrering av data - vi vil ikke alltid at all dataen fra databasen vår skal returneres i en `Response` (f.eks. passordoppre eller sensitiv informasjon)
+- Direkte oppretting / oppdatering av instanser i databasen
+
+Ettersom en serializer gjør så mye, kan det være litt vanskelig å forstå hvordan den egentlig skal brukes. La oss dermed starte med en svært enkel serializer, som vi kan bygge litt videre på i senere oppgaver.
+
+1. Åpne serializers-pakken [./hamsterapp/serializers](./hamsterapp/serializers) (se gjerne på de to serializer-filene som allerede befinner seg der), og lag en ny fil som du kan kalle `weight_record.py`.
+2. Lag en ny klasse kalt `WeightRecordSerializer` inni `weight_record.py` som arver fra `serializers.ModelSerializer`.
+3. Inni `WeightRecordSerializer`, lag en ny klasse som du kaller `Meta`, og som har 2 attributter
+  - `model`, som er lik weight record - modellen du lagde tidligere
+  - `fields`, som du foreløpig kan sette til `"__all__"`
+
+En ModelSerializer er en forenkling av den ordinære `serializers.Serializer`-klassen [(se django-dokumentasjon her)](https://www.django-rest-framework.org/api-guide/serializers/#declaring-serializers). Det er viktig å forstå at en serializer egentlig ikke bryr seg om modellen din; en serializer er ikke "knyttet til en modell". En serializer er bare et sett med felter, og en ModelSerializer kan lage seg disse feltene basert på en modell. 
+
+En vanlig serializer kan for eksempel ha et felt som `text = TextField(...)` og `email = EmailField(...)`. Når vi gir serializeren data `{text="test", email="test@test.com"}`, vil serializeren knytte dataen til de ulike feltene i serializeren (basert på navn, `text="test" => text`, `email="test@test.com" => email`). Modellen vår, `WeightRecordModel`, har allerede definert noen slike felter. Når vi (inne i serializeren) setter `model = WeightRecordModel`, vil serializeren automatisk lage seg felter tilsvarende de vi deklarerte i modellen.
+
+Når vi gir serializeren data og ber den om å validere dataen, kommer den til å sjekke ved hjelp av interne validator-funksjoner:
+- Er "test@test.com" en gyldig e-post-adresse?
+- Er "test" en gyldig tekst-streng?
+
+Vi kommer til å lære å _bruke_ serializers ordentlig i neste oppgave.
+
+// TODO: Forklar fields i ModelSerializer
