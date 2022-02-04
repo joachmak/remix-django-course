@@ -17,7 +17,7 @@ Django REST bygger videre på Django, og benytter seg dermed av Django-modeller.
 _tabell_ i en typisk relasjonell database som MySQL eller PostgreSQL. 
 
 Istedenfor å koble oss opp til en database og skrive database-spørringer manuelt, gjør Django det for oss. Alt vi 
-trenger å gjøre er å definere modellene i databasen vår. Modellene blir representert som ordinære Python-klasser. For å
+trenger å gjøre er å definere modellene som vi vil skal bli representert i databasen vår. Modellene er helt ordinære Python-klasser. For å
 manipulere dataen som er lagret i databasen, trenger vi dermed bare å kalle på metodene til disse klassene.
 
 <img src="https://user-images.githubusercontent.com/55885044/152528847-32c601ee-5f4a-4148-bece-7242a953379e.png" width="650px" />
@@ -46,11 +46,25 @@ En oppdatering av databasen kalles en "migrasjon" i Django. Vi "migrerer" ny inf
 1. Åpne en terminal, og sørg for at du er inni backend-mappen (`remix-django-course/backend/`).
 2. Skriv `python manage.py makemigrations`
   - Her kaller du bare `makemigrations` gjennom `manage.py`-filen.
-4. Skriv `python manage.py migrate`
+3. Skriv `python manage.py migrate`
 
 Sånn! Da skal databasen inneholde en `WeightRecord`-tabell. I punkt 2 ble det laget migrasjonsfiler. Django holder styr på alle endringer i en database. Merk at `WeightRecordModel` har en relasjon til `HamsterModel`. Dermed er modellen vi nettopp har laget avhengig av at `HamsterModel` allerede finnes i databasen. Siden vi kan ha mange slike avhengigheter, tar ikke Django noen sjanser. Den noterer seg hva som blir gjort under hver migrasjon i såkalte migrasjonsfiler som du kan se i [./hamsterapp/migrations](./hamsterapp/migrations). Når noen skal gjenskape / bygge databasen og kjører `python manage.py migrate`, vil Django starte fra første migrasjonsfil (merk at hver migrasjonsfil har et tall, f.eks. `0001_initial.py`), og stegvis applikere alle endringer.
 
 #### Kort oppsummert
 1. Lag modell
-2. Migrer modell (si til databasen at modellen finnes)
+2. Migrer modell (bygg og rediger tabeller i databasen)
+
+### Oppgave 1b) - Admin-panel
+
+Nå har vi lagt inn weight records i databasen, men foreløpig har vi ingen måte å registrere weight records på. Det enkleste, og noe man gjerne kan bruke til litt testing, er å sette opp et grunnleggende admin-panel. Long gone are the days of "jeg har brukt 40 timer på å lage et admin-panel". Django genererer et admin-panel automatisk - helt gratis!
+
+Siden vi foreløpig ikke har så mye logikk i vårt admin-panel, har vi ikke laget en dedikert admin-pakke. Istedenfor vil du finne en [./hamsterapp/admin.py](./hamsterapp/admin.py) fil der alle modellene blir registrert. 
+
+1. Importer `WeightRecordModel`
+2. Registrer en `WeightRecordAdmin`-klasse i `admin.py`-filen. Foreløpig trenger vi ikke å overskrive Djangos standard admin-panel, så klassen kan bare inneholde en `pass` (en placeholder for "ingenting" i Python).
+3. For at Django skal tolke klassen som en admin-side for en modell, må du inkludere en `@admin.register()`-annotation over klassen. Inni parentesene kan du sette inn `WeightRecordModel` som du lagde i forrige deloppgave.
+
+Åpne [http://localhost:8080/admin](http://localhost:8080/admin), og logg inn med brukernavn `admin` og passord `admin`. Du bør nå se en ny `Weight records` seksjon i `Hamsters`-panelet. Her kan du legge til, redigere og slette weight records. Avhengig av hvilke felt-typer (field-types) du brukte i modellen, vil Django generere ulike input-metoder (tekstfelt for `CharField`, "text area" for `TextField`, dato-felt for `DateField`, osv.)
+
+Registrer gjerne noen weight records ved hjelp av admin-panelet før du går videre!
 
