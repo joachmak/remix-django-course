@@ -14,7 +14,13 @@
       </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-4">
-      <form id="form" action="#" method="POST" @submit.prevent="onSubmit">
+      <form
+        id="form"
+        action="#"
+        method="POST"
+        enctype="multipart/form-data"
+        @submit.prevent="onSubmit"
+      >
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
             <div class="col-span-6 sm:col-span-4">
@@ -32,24 +38,22 @@
             </div>
             <div>
               <label
-                for="about"
+                for="description"
                 class="block text-sm font-medium text-gray-700"
               >
-                About
+                Description
               </label>
               <div class="mt-1">
                 <textarea
                   v-model="description"
-                  id="about"
-                  name="about"
+                  id="description"
+                  name="description"
                   rows="3"
                   class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                   placeholder="you@example.com"
                 />
               </div>
-              <p class="mt-2 text-sm text-gray-500">
-                Brief description for your profile. URLs are hyperlinked.
-              </p>
+              <p class="mt-2 text-sm text-gray-500">Describe your hamster</p>
             </div>
 
             <div class="col-span-6 sm:col-span-4">
@@ -59,7 +63,7 @@
               <input
                 v-model="bday"
                 type="date"
-                name="birthday"
+                name="bday"
                 id="bday"
                 class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
               />
@@ -88,7 +92,7 @@
               </label>
               <input
                 id="file-upload"
-                name="file-upload"
+                name="image"
                 type="file"
                 @change="uploadFile"
               />
@@ -108,8 +112,8 @@
   </div>
 </template>
 <script lang="ts">
-import { getAllSpecies, type Species } from "@/service/speciesService";
-import { createNewHamster } from "@/service/hamsterService";
+import { createNewHamster } from "../service/hamsterservice";
+import { getAllSpecies, type Species } from "../service/speciesService";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -135,14 +139,10 @@ export default defineComponent({
         this.img = target.files[0];
       }
     },
-    async onSubmit() {
-      let hamsterFormData = new FormData();
-      hamsterFormData.append("name", this.name);
-      hamsterFormData.append("description", this.description);
-      hamsterFormData.append("date_of_birth", "2022-02-14");
-      hamsterFormData.append("image", this.img!.slice());
-      hamsterFormData.append("species", this.species.toString());
-      hamsterFormData.forEach((t) => console.log(t));
+    onSubmit() {
+      const form = document.getElementById("form");
+      let hamsterFormData = new FormData(form as HTMLFormElement);
+      console.log(hamsterFormData.get("image")?.valueOf());
       createNewHamster(hamsterFormData);
     },
   },

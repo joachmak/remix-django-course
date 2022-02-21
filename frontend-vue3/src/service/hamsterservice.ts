@@ -42,13 +42,17 @@ export async function getHamsterById(id: number | string): Promise<Hamster> {
 
 export async function createNewHamster(hamsterFormData: FormData) {
   try {
-    const response = await axios.post(
-      API_BASE_URL + "/hamsters/",
-      hamsterFormData,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
+    const response = await axios({
+      url: API_BASE_URL + "/hamsters/",
+      method: "post",
+      data: {
+        name: hamsterFormData.get("name"),
+        description: hamsterFormData.get("description"),
+        date_of_birth: hamsterFormData.get("bday"),
+        specied: hamsterFormData.get("species"),
+        image: hamsterFormData.get("image"),
+      },
+    });
     return response;
   } catch (error) {
     console.log(error);
