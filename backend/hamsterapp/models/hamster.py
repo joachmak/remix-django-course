@@ -1,5 +1,15 @@
+import random
+
 from django.db import models
 from hamsterapp.models import SpeciesModel
+import os
+
+
+def get_random_image():
+    folder_path = os.path.join('media', 'random_hamster_images')
+    images = os.listdir(folder_path)
+    random_image_name = images[random.randrange(0, len(images))]
+    return "media/random_hamster_images/" + random_image_name
 
 
 class HamsterModel(models.Model):
@@ -23,7 +33,8 @@ class HamsterModel(models.Model):
     description = models.TextField(max_length=350, blank=True)
     date_of_birth = models.DateField()
     # Image will be saved to MEDIA_ROOT/hamster_images/2022/01 if saved in january 2022
-    image = models.ImageField(upload_to="hamster_images/%Y/%m")
+    # image = models.ImageField(upload_to="hamster_images/%Y/%m")
+    image = models.TextField(default=get_random_image)
     species = models.ForeignKey(SpeciesModel, on_delete=models.SET_NULL, null=True)
     hamster_secret = models.TextField(blank=True)
     height = models.PositiveSmallIntegerField(verbose_name="height (cm)")
