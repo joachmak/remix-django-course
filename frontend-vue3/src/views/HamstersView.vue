@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="mt-5">
+    <ul class="mt-5 flex flex-wrap justify-center">
       <li v-for="hamster in hamsterList" :key="hamster.id">
         <HamsterListCard :hamster="hamster" />
       </li>
@@ -17,6 +17,7 @@ export default defineComponent({
   name: "HamsterList",
   async created() {
     this.hamsterList = await getAllHamsters();
+    console.log(this.hamsterList);
   },
   data() {
     return {

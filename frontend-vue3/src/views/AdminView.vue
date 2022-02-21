@@ -1,8 +1,5 @@
 <template>
-  <label for="hamster-radio">Hamster</label>
-  <input id="hamster-radio" type="radio" value="hamster" v-model="selected" />
-  <input type="radio" value="species" v-model="selected" />
-  <div class="md:grid md:grid-cols-5 md:gap-3">
+  <div class="md:grid md:grid-cols-5 md:gap-3 mt-5">
     <div class="md:col-span-1">
       <div class="px-4 sm:px-0">
         <h3 class="text-lg font-medium leading-6 text-gray-900">
@@ -133,17 +130,26 @@ export default defineComponent({
     };
   },
   methods: {
-    uploadFile($event: Event) {
-      const target = $event.target as HTMLInputElement;
+    uploadFile(event: Event) {
+      const target = event.target as HTMLInputElement;
       if (target && target.files) {
         this.img = target.files[0];
       }
     },
     onSubmit() {
-      const form = document.getElementById("form");
-      let hamsterFormData = new FormData(form as HTMLFormElement);
-      console.log(hamsterFormData.get("image")?.valueOf());
-      createNewHamster(hamsterFormData);
+      let data = new FormData();
+      data.append("name", this.name);
+      data.append("description", this.description);
+      data.append("date_of_birth", this.bday?.toString() ?? "");
+      data.append("image", this.img ?? "");
+      data.append("species", this.species.toString());
+
+      this.name = "";
+      this.description = "";
+      this.bday = undefined;
+      this.img = null;
+
+      createNewHamster(data);
     },
   },
 });

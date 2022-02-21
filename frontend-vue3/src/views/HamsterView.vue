@@ -27,7 +27,7 @@
         <input v-model="date" id="dato" name="date" type="date" />
         <button
           type="submit"
-          class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-2"
         >
           Registrer
         </button>
@@ -47,8 +47,9 @@ import HamsterWeightChart from "../components/HamsterWeightChart.vue";
 export default defineComponent({
   name: "HamsterView",
   async created() {
-    const id = this.$route.params.id[0];
+    const { id } = this.$route.params;
     this.hamsterData = await getHamsterById(parseInt(id));
+    console.log(this.hamsterData);
   },
   data() {
     return {

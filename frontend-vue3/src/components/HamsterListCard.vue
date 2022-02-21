@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/hamsters/' + hamster!.id">
+  <router-link :to="'/hamsters/' + hamster?.id">
     <div class="p-1 rounded-md hover:bg-orange-200">
       <img
         class="rounded-md mb-2 shadow-lg object-cover h-48 w-96"
@@ -7,7 +7,7 @@
         alt="hamster"
       />
       <h3 class="text-base font-semibold">{{ hamster?.name }}</h3>
-      <span>{{ age }}</span>
+      <span>{{ age }} old</span>
       <br />
 
       <router-link to="/species">
