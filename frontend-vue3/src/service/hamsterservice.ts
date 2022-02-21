@@ -34,25 +34,29 @@ export async function getHamsterById(id: number | string): Promise<Hamster> {
   const response = await axios({
     method: "get",
     url: API_BASE_URL + "/hamsters/" + id,
-  });
-  response.data.species = await getSpeciesById(response.data.species);
-  response.data.image = API_BASE_URL + response.data.image;
-  return response.data;
+  })
+    .then(async (response) => {
+      response.data.species = await getSpeciesById(response.data.species);
+      response.data.image = API_BASE_URL + response.data.image;
+      return response.data;
+    })
+    .catch((error) => console.log(error));
+  return response;
 }
 
 export async function createNewHamster(hamsterFormData: FormData) {
   try {
-    const response = await axios({
-      url: API_BASE_URL + "/hamsters/",
-      method: "post",
-      data: {
-        name: hamsterFormData.get("name"),
-        description: hamsterFormData.get("description"),
-        date_of_birth: hamsterFormData.get("bday"),
-        specied: hamsterFormData.get("species"),
-        image: hamsterFormData.get("image"),
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
       },
-    });
+    };
+
+    const response = await axios.post(
+      `${API_BASE_URL}/hamsters/`,
+      hamsterFormData,
+      config
+    );
     return response;
   } catch (error) {
     console.log(error);

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h2>{{ name }}'s weight over time</h2>
+    <h2>{{ name }}'s weight over time:</h2>
     <Chart
       :size="{ width: 700, height: 400 }"
       :data="data"
       :margin="margin"
       :direction="direction"
-      class="bg-white p-3 rounded shadow-lg"
+      class="bg-white p-3 rounded shadow-lg mt-2"
     >
       <template #layers>
         <Grid strokeDasharray="2,2" />
