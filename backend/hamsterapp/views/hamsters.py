@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.status import HTTP_204_NO_CONTENT
+from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import FormParser
 
 from hamsterapp.models import HamsterModel
 from hamsterapp.serializers import HamsterSerializer
@@ -43,6 +45,7 @@ class HamsterViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Cr
         POST requests will be handled by this method!
         For example: POST 127.0.0.1:8000/hamsters/
         """
+        parser_classes = [MultiPartParser, FormParser]
         serializer = HamsterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
