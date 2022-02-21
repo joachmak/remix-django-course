@@ -1,12 +1,12 @@
-import {Link} from "@remix-run/react";
+import Navbar from "~/components/Navbar";
+import {Outlet} from "react-router-dom";
 
 export default function Index() {
-  return (
-    <div>
-        <h1>Welcome to Remix</h1>
-        <Link to="/hamsters">Hamster overview</Link><br />
-        <Link to="/species">Species overview</Link><br />
-        <Link to="/admin">Admin panel</Link>
-    </div>
-  );
+
+    return (
+        <div>
+            <Navbar />
+            <Outlet />
+        </div>
+    );
 }
