@@ -1,15 +1,16 @@
 from django.contrib import admin
+
 from hamsterapp.models import HamsterModel, WeightRecordModel, SpeciesModel
 
 
 @admin.register(HamsterModel)
 class HamsterAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'age', )
 
 
 @admin.register(WeightRecordModel)
 class WeightRecordAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('date', 'hamster', 'weight_in_grams')
 
 
 @admin.register(SpeciesModel)

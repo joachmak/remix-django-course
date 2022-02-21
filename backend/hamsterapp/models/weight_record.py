@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+
 from hamsterapp.models.hamster import HamsterModel
 
 
@@ -21,3 +23,7 @@ class WeightRecordModel(models.Model):
 
     def __str__(self):
         return f"{self.hamster}: {self.weight_in_grams}g on {self.date}"
+
+    def clean(self):
+        if self.weight_in_grams > 250:
+            raise ValidationError("Weight cannot be above 250g")

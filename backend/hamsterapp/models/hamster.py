@@ -1,3 +1,6 @@
+import datetime
+
+from django.contrib import admin
 from django.db import models
 from hamsterapp.models import SpeciesModel
 
@@ -41,3 +44,9 @@ class HamsterModel(models.Model):
         """ This method is actually quite important. Without it, in the admin panel, we would just see
          "Hamster Object 1" or "Hamster Object 2" instead of the hamster's name."""
         return self.name
+
+    @admin.display
+    def age(self):
+        date_now = datetime.datetime.now()
+        month_diff = (date_now.year - self.date_of_birth.year) * 12 + date_now.month - self.date_of_birth.month
+        return f"{month_diff} months"
