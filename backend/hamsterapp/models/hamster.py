@@ -1,3 +1,6 @@
+import datetime
+
+from django.contrib import admin
 from django.db import models
 from hamsterapp.models import SpeciesModel
 
@@ -25,6 +28,8 @@ class HamsterModel(models.Model):
     # Image will be saved to MEDIA_ROOT/hamster_images/2022/01 if saved in january 2022
     image = models.ImageField(upload_to="hamster_images/%Y/%m")
     species = models.ForeignKey(SpeciesModel, on_delete=models.SET_NULL, null=True)
+    hamster_secret = models.TextField(blank=True)
+    height = models.PositiveSmallIntegerField(verbose_name="height (cm)")
 
     objects = models.Manager()
 
@@ -39,3 +44,4 @@ class HamsterModel(models.Model):
         """ This method is actually quite important. Without it, in the admin panel, we would just see
          "Hamster Object 1" or "Hamster Object 2" instead of the hamster's name."""
         return self.name
+

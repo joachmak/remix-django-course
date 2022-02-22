@@ -6,3 +6,4 @@ class HamsterSerializer(serializers.ModelSerializer):
     class Meta:
         model = HamsterModel
         fields = '__all__'
+

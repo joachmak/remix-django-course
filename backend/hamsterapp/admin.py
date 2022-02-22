@@ -1,14 +1,10 @@
 from django.contrib import admin
-from hamsterapp.models import HamsterModel, WeightRecordModel, SpeciesModel
+
+from hamsterapp.models import HamsterModel, SpeciesModel
 
 
 @admin.register(HamsterModel)
 class HamsterAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(WeightRecordModel)
-class WeightRecordAdmin(admin.ModelAdmin):
     pass
 
 
