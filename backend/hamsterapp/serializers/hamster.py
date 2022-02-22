@@ -5,5 +5,5 @@ from hamsterapp.models import HamsterModel
 class HamsterSerializer(serializers.ModelSerializer):
     class Meta:
         model = HamsterModel
-        exclude = ['hamster_secret']
+        fields = '__all__'
 

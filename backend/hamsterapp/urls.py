@@ -1,5 +1,5 @@
 from rest_framework.routers import SimpleRouter
-from hamsterapp.views import HamsterViewSet, SpeciesViewSet, WeightRecordViewSet
+from hamsterapp.views import HamsterViewSet, SpeciesViewSet
 
 """
 The urls will be matched from top to bottom, so the ones registered first will be compared first to our URL.
@@ -11,7 +11,6 @@ error, because "species" is not a valid hamster id.
 
 router = SimpleRouter()
 router.register("species", SpeciesViewSet, basename="species")
-router.register("weight_records", WeightRecordViewSet, basename="weight_records")
 router.register("", HamsterViewSet, basename="hamster")
 
 urlpatterns = router.urls
