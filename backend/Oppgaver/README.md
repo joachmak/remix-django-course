@@ -12,4 +12,3 @@ I dette kurset skal vi begynne helt "innerst". Først definerer vi modellen, set
 
 [Oppgave 1 - Vi lager et nytt endepunkt og veier noen hamstere](./Oppgave%201) <br/>
 [Oppgave 2 - Noen små forbedringer](./Oppgave%202) <br/>
-[Oppgave 3 - Testing](./Oppgave%203)
