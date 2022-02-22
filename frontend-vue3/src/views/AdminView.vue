@@ -149,7 +149,8 @@ export default defineComponent({
       this.bday = undefined;
       this.img = null;
 
-      createNewHamster(data);
+      const request = createNewHamster(data);
+      console.log(request);
     },
   },
 });

@@ -29,17 +29,6 @@ header {
   max-height: 100vh;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(0, 0%, 92%, 0.64);
-  }
-}
-
 nav {
   width: 100%;
   font-size: 12px;
@@ -66,8 +55,5 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
-}
-
-@media (min-width: 1024px) {
 }
 </style>
