@@ -6,7 +6,7 @@
       se [veiledning for installasjon av pip](https://pip.pypa.io/en/stable/installation/)
 - Åpne terminal i rot-mappen (remix-django-course/backend), og lag et virtual environment: 
 ```
-python -m venv ./
+python -m venv ./venv/
 ````
 
 - Aktiver venv-et du lagde ved å kjøre `activate`-scriptet som ligger i `./venv/Scripts/activate`
