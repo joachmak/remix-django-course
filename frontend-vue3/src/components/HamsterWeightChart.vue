@@ -34,6 +34,7 @@ export default defineComponent({
   setup() {
     /* Fetch data from weightRecordAPI instead of mock data here */
     const data = ref(mockWeightData);
+    //const data = await getWeightRecords();
     const direction = ref("horizontal");
     const margin = ref({
       left: 0,
