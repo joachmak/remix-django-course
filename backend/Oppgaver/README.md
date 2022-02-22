@@ -11,4 +11,5 @@ Her er en overordnet oversikt over hvordan Django håndterer requests:
 I dette kurset skal vi begynne helt "innerst". Først definerer vi modellen, setter opp et admin-panel, deklarerer en serializer og et ViewSet, og til slutt konfigurerer vi url patterns så det blir mulig å sende requests til endepunktet. Ikke frykt om det virker helt uforståelig nå. Se gjerne på den overordnede modellen mens du løser oppgavene, så vil alt bli mye tydeligere🙂
 
 [Oppgave 1 - Vi lager et nytt endepunkt og veier noen hamstere](./Oppgave%201) <br/>
-[Oppgave 2 - ???](./Oppgave%202)
+[Oppgave 2 - Noen små forbedringer](./Oppgave%202) <br/>
+[Oppgave 3 - Testing](./Oppgave%203)
