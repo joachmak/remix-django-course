@@ -10,7 +10,7 @@ import {
 import type { MetaFunction } from "remix";
 import {MantineProvider} from "@mantine/core";
 import rootStyles from "./root.css"
-import {AppShellWrapper} from "~/components/utilComponents";
+import {AppShellWrapper} from "~/components/wrapperComponents";
 
 
 export const meta: MetaFunction = () => {
@@ -29,7 +29,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-          <MantineProvider theme={{colorScheme: 'dark'}}>
+          <MantineProvider theme={{colorScheme: 'dark'}} withGlobalStyles withNormalizeCSS>
             <AppShellWrapper>
               <Outlet />
             </AppShellWrapper>
