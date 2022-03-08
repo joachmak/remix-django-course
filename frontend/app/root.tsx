@@ -7,6 +7,9 @@ import {
   ScrollRestoration,
 } from "remix";
 import type { MetaFunction } from "remix";
+import { Group, MantineProvider } from "@mantine/core";
+import MarginWrapper from "./components/MarginWrapper";
+import Navbar from "./components/Navbar";
 
 export const meta: MetaFunction = () => {
   return { title: "Django Remix Course" };
@@ -22,7 +25,18 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <MantineProvider
+          theme={{ colorScheme: "dark" }}
+          withNormalizeCSS
+          withGlobalStyles
+        >
+          <MarginWrapper>
+            <Group style={{ width: "100%" }}>
+              <Navbar />
+              <Outlet />
+            </Group>
+          </MarginWrapper>
+        </MantineProvider>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
