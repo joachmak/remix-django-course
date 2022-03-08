@@ -14,7 +14,15 @@ function CustomMenuButton({
   const currentPath = location.pathname;
   return (
     <Button
-      variant={path === currentPath ? "filled" : "outline"}
+      variant={
+        path === "/"
+          ? currentPath === path
+            ? "filled"
+            : "outline"
+          : currentPath.startsWith(path)
+          ? "filled"
+          : "outline"
+      }
       style={{ width: "100%", height: 50, margin: "10px 0", fontSize: 16 }}
     >
       {children}
