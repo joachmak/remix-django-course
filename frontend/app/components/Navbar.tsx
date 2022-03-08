@@ -32,10 +32,11 @@ function CustomLink({ path, text }: { path: string; text: string }) {
 
 export default function Navbar() {
   return (
-    <SimpleGrid style={{ width: "100%" }} cols={3}>
+    <SimpleGrid style={{ width: "100%" }} cols={4}>
       <CustomLink path={"/"} text={"Hjem"} />
       <CustomLink path={"/hamsters"} text={"Hamstere"} />
-      <CustomLink path={"/species"} text={"Hamster-arter"} />
+      <CustomLink path={"/species"} text={"Arter"} />
+      <CustomLink path={"/admin"} text={"Admin"} />
     </SimpleGrid>
   );
 }
