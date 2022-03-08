@@ -2,6 +2,7 @@ import { Link, Outlet, useLoaderData } from "remix";
 import HamsterForm from "~/components/HamsterForm";
 import { getSpecies } from "~/modules/species";
 import SpeciesForm from "~/components/SpeciesForm";
+import { Grid } from "@mantine/core";
 
 export async function loader() {
   let data = {
@@ -17,10 +18,15 @@ export default function AdminPanel() {
     <>
       <Outlet />
       <h1>Admin panel</h1>
-      <HamsterForm species={loaderData.species} />
-      <SpeciesForm />
-      <br />
       <Link to={"../"}>Home</Link>
+      <Grid justify="center" align="center">
+        <Grid.Col>
+          <HamsterForm species={loaderData.species} />
+        </Grid.Col>
+        <Grid.Col>
+          <SpeciesForm />
+        </Grid.Col>
+      </Grid>
     </>
   );
 }

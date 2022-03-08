@@ -1,3 +1,13 @@
+import {
+  Button,
+  Group,
+  Select,
+  Textarea,
+  Text,
+  TextInput,
+} from "@mantine/core";
+import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { useForm } from "@mantine/hooks";
 import { Species } from "~/modules/species";
 
 interface HamsterFormProps {
@@ -5,55 +15,92 @@ interface HamsterFormProps {
 }
 
 export default function HamsterForm(props: HamsterFormProps) {
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("Submitting hamster data");
-    return false;
-  };
+  const form = useForm({
+    initialValues: {
+      name: "",
+      description: "",
+      date: undefined,
+      file: File,
+      species: "",
+    },
+
+    validationRules: {
+      name: (value) => value.trim().length >= 3,
+      description: (value) => value.trim().length >= 3,
+      date: (value) => (value ? true : false),
+      species: (value) => value.trim().length > 0,
+    },
+    errorMessages: {
+      name: "Name must include at least 3 characters and not be longer than 50 characters",
+      description:
+        "Description must be longer than 10 characters and not be longer than 300 characters",
+      date: "You must choose a date!",
+      species: "You must select a specie",
+    },
+  });
+
+  const mappedSpecies = props.species.map((specie) => ({
+    value: specie.id.toString(),
+    label: specie.name,
+  }));
 
   return (
     <>
       <h2>Add hamsters</h2>
-      <form action="" id="hamsterForm">
+      <form onSubmit={form.onSubmit((values) => console.log(values))}>
         {/*
-                 Usually, we would use Remix's Form component, but it currently doesn't support encryption type
-                 multipart/form-data which we need for sending images to the backend.
-                 https://remix.run/docs/en/v1.1.3/api/remix#form-enctype
-                 */}
-        <label htmlFor="name">Name:</label>
-        <br />
-        <input type="text" id="name" name="name" />
-        <br />
-
-        <label htmlFor="description">Description:</label>
-        <br />
-        <textarea id="description" name="description" />
-        <br />
-
-        <label htmlFor="dateOfBirth">Date of birth:</label>
-        <br />
-        <input type="date" id="dateOfBirth" name="dateOfBirth" />
-        <br />
-
-        <label htmlFor="img">Picture:</label>
-        <br />
-        <input type="file" id="img" name="img" accept="image/*" />
-        <br />
-
-        <label htmlFor="species">Species:</label>
-        <br />
-        <select id="species" name="species">
-          <option value="">Unspecified</option>
-          {props.species &&
-            props.species.map((species) => (
-              <option key={species.id} value={species.id}>
-                {species.name}
-              </option>
-            ))}
-        </select>
-        <br />
-        <br />
-        <button onClick={(e) => onSubmit(e)}>Submit</button>
+          Usually, we would use Remix's Form component, but it currently doesn't support encryption type
+          multipart/form-data which we need for sending images to the backend.
+          https://remix.run/docs/en/v1.1.3/api/remix#form-enctype
+        */}
+        <TextInput
+          required
+          label="Name"
+          placeholder="Bolle bollesen"
+          onBlur={() => form.validateField("name")}
+          {...form.getInputProps("name")}
+        />
+        <Textarea
+          placeholder="Description of your hamster"
+          label="Description"
+          required
+          onBlur={() => form.validateField("description")}
+          {...form.getInputProps("description")}
+        />
+        <Dropzone
+          onDrop={(file) => (file[0])}
+          onReject={(file) =>
+            form.setFieldError("file", "Unsupported file format")
+          }
+          multiple={false}
+          maxSize={3 * 1024 ** 2}
+          accept={IMAGE_MIME_TYPE}
+        >
+          {(status) => (
+            <Group
+              position="center"
+              spacing="xl"
+              style={{ minHeight: 220, pointerEvents: "none" }}
+            >
+              <div>
+                <Text size="xl" inline>
+                  Drag images here or click to select files
+                </Text>
+                <Text size="sm" color="dimmed" inline mt={7}>
+                  Attach one hamster-image. IT should not exceed 5mb
+                </Text>
+              </div>
+            </Group>
+          )}
+        </Dropzone>
+        <Select
+          required
+          label="Select a species"
+          data={mappedSpecies}
+          {...form.getInputProps("species")}
+          onBlur={() => form.validateField("description")}
+        />
+        <Button type="submit">Submit</Button>
       </form>
     </>
   );

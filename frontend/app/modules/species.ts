@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_BASE_URL } from "~/constants";
 
 export type Species = {
-  id?: number;
+  id: number;
   name: string;
   latin_name: string;
   description: string;
