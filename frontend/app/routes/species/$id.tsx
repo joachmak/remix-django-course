@@ -1,5 +1,9 @@
+import { Button, Divider, Group, Text, useMantineTheme } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { LoaderFunction, useLoaderData } from "remix";
 import invariant from "tiny-invariant";
+import CustomContainer from "~/components/CustomContainer";
+import HeaderText from "~/components/HeaderText";
 import { getSpeciesById, Species } from "~/modules/species";
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -9,17 +13,28 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function SpeciesById() {
   const species: Species = useLoaderData();
-  console.log(species);
+  const theme = useMantineTheme();
   return (
-    <div>
-      <h1>{species.name}</h1>
-      <p>
-        <i>{species.latin_name}</i>
-      </p>
-      <p>
-        <b>Description:</b> {species.description}
-      </p>
-      <p>Typical weight: {species.typical_weight}g</p>
-    </div>
+    <CustomContainer>
+      <Group position="apart">
+        <div>
+          <HeaderText>{species.name}</HeaderText>
+          <Text color={theme.colors.dark[1]}>
+            Latin: <i>{species.latin_name}</i>
+          </Text>
+        </div>
+        <Link to={"/species"}>
+          <Button variant="outline" color={"red"}>
+            x
+          </Button>
+        </Link>
+      </Group>
+
+      <Divider style={{ margin: "10px 0" }} variant="dashed" />
+      <Text style={{ marginBottom: 10 }}>
+        <b>Beskrivelse:</b> "<i>{species.description}</i>"
+      </Text>
+      <Text>Typisk vekt for denne arten: {species.typical_weight}g</Text>
+    </CustomContainer>
   );
 }
