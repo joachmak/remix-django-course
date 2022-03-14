@@ -14,7 +14,7 @@ export default function Species() {
       <h1>Species</h1>
       <ul>
         {species_list.map((species) => (
-          <li>
+          <li key={species.id}>
             <Link to={"/species/" + species.id}>{species.name}</Link>
           </li>
         ))}

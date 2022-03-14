@@ -1,7 +1,11 @@
 import { Button, NumberInput, Textarea, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
+import { useState } from "react";
+import { Form } from "remix";
 
 export default function SpeciesForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -18,6 +22,7 @@ export default function SpeciesForm() {
         value.trim().length >= 3 && value.trim().length <= 300,
       typical_weight: (value) => value > 0 && value <= 350,
     },
+
     errorMessages: {
       name: "Name must include at least 3 characters and not be longer than 50 characters",
       latin_name:
@@ -30,15 +35,11 @@ export default function SpeciesForm() {
   return (
     <>
       <h2>Add species</h2>
-      <form
-        onSubmit={form.onSubmit((values) => {
-          console.log(values);
-          form.reset;
-        })}
-      >
+      <Form method="post">
         <TextInput
           required
           label="Name"
+          name="name"
           placeholder="Bolle bollesen"
           onBlur={() => form.validateField("name")}
           {...form.getInputProps("name")}
@@ -46,6 +47,7 @@ export default function SpeciesForm() {
         <TextInput
           required
           label="Latin name"
+          name="latin_name"
           placeholder="Bolle"
           onBlur={() => form.validateField("latin_name")}
           {...form.getInputProps("latin_name")}
@@ -53,6 +55,7 @@ export default function SpeciesForm() {
         <Textarea
           placeholder="Description of the specie"
           label="Description"
+          name="description"
           required
           onBlur={() => form.validateField("description")}
           {...form.getInputProps("description")}
@@ -61,13 +64,14 @@ export default function SpeciesForm() {
           defaultValue={18}
           placeholder="123"
           label="Typical weight"
+          name="typical_weight"
           required
           hideControls
           onBlur={() => form.validateField("typical_weight")}
           {...form.getInputProps("typical_weight")}
         />
         <Button type="submit">Submit</Button>
-      </form>
+      </Form>
     </>
   );
 }
