@@ -37,7 +37,12 @@ export default function SpeciesById() {
       <Text>Typisk vekt for denne arten: {species.typical_weight}g</Text>
       <Form method="delete" action="/species/actions/delete">
         <input type="hidden" name="id" value={species.id} />
-        <Button type="submit" variant="subtle" color="red">
+        <Button
+          style={{ marginTop: 15 }}
+          type="submit"
+          variant="filled"
+          color="red"
+        >
           Slett
         </Button>
       </Form>

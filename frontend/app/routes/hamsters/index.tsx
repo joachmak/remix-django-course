@@ -6,7 +6,7 @@ import {
   Text,
   useMantineTheme,
 } from "@mantine/core";
-import { Link, useLoaderData } from "remix";
+import { Link, redirect, useLoaderData } from "remix";
 import HeaderText from "~/components/HeaderText";
 import { getHamsters, Hamster } from "~/modules/hamster";
 
@@ -36,14 +36,17 @@ function HamsterCard({
         {description}
       </Text>
 
-      <Link to={"/hamsters/" + id} style={{ width: "100%" }}>
+      <Link
+        to={id.toString()}
+        style={{ width: "100%", textDecoration: "none" }}
+      >
         <Button
           variant="light"
           color="blue"
           fullWidth
           style={{ marginTop: 14 }}
         >
-          Se detaljert informasjon
+          Detaljert informasjon
         </Button>
       </Link>
     </Card>

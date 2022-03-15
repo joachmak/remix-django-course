@@ -91,6 +91,7 @@ export default function HamsterWithId() {
             alt={"Bilde av " + hamster.name}
             radius="sm"
           />
+          <WeightRegistrationForm hamsterId={hamster.id} />
         </div>
         <div style={{}}>
           <HeaderText>{hamster.name}</HeaderText>
@@ -101,7 +102,6 @@ export default function HamsterWithId() {
           <WeightRecordTable weightRecords={weightRecords} />
         </div>
       </Group>
-      <WeightRegistrationForm hamsterId={hamster.id} />
     </CustomContainer>
   );
 }
