@@ -68,7 +68,7 @@ export default function HamsterForm(props: HamsterFormProps) {
           {...form.getInputProps("description")}
         />
         <Dropzone
-          onDrop={(file) => (file[0])}
+          onDrop={(file) => file[0]}
           onReject={(file) =>
             form.setFieldError("file", "Unsupported file format")
           }
@@ -87,7 +87,7 @@ export default function HamsterForm(props: HamsterFormProps) {
                   Drag images here or click to select files
                 </Text>
                 <Text size="sm" color="dimmed" inline mt={7}>
-                  Attach one hamster-image. IT should not exceed 5mb
+                  Attach one hamster-image. It should not exceed 5mb
                 </Text>
               </div>
             </Group>
