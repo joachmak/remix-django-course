@@ -4,7 +4,7 @@ import { Form, LoaderFunction, useLoaderData } from "remix";
 import invariant from "tiny-invariant";
 import CustomContainer from "~/components/CustomContainer";
 import HeaderText from "~/components/HeaderText";
-import WeightRegistrationForm from "~/components/WeightRegistrationForm";
+import WeightRegistrationForm from "~/components/forms/WeightRegistrationForm";
 import { getHamster, Hamster } from "~/modules/hamster";
 import {
   getWeightRecordsOfHamsterWithId,
@@ -45,7 +45,7 @@ function WeightRecordTable({
             <td>{record.weight_in_grams}</td>
             <td>{record.hamster_bmi}</td>
             <td>
-              <Form method="delete" action="/weight_records/delete">
+              <Form method="delete" action="/weight_records/actions/delete">
                 <input type="hidden" name="record_id" value={record.id} />
                 <input type="hidden" name="hamster_id" value={record.hamster} />
                 <Button type="submit" variant="subtle" color="red">

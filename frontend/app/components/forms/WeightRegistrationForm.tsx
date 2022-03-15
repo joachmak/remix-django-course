@@ -1,7 +1,6 @@
 import { Button, NumberInput } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useForm } from "@mantine/hooks";
-import { SetStateAction, useState } from "react";
 import { Form } from "remix";
 
 export default function WeightRegistrationForm({
@@ -23,7 +22,7 @@ export default function WeightRegistrationForm({
   });
   return (
     <>
-      <Form method="post" action="/weight_records/create">
+      <Form method="post" action="/weight_records/actions/create">
         <NumberInput
           defaultValue={100}
           placeholder="123"

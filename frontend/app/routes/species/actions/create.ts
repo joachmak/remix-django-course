@@ -29,7 +29,6 @@ const create_species = async (form_data: FormData) => {
 export const action: ActionFunction = async ({ request }) => {
   // This is called when a POST / PUT / PATCH / DELETE request is sent to this route.
   const form_data = await request.formData();
-  console.log(form_data);
   try {
     let data = await create_species(form_data);
     return redirect("/species/" + data.id); // Redirect to home page

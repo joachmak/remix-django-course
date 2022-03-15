@@ -35,7 +35,7 @@ export default function SpeciesForm() {
   return (
     <>
       <h2>Add species</h2>
-      <Form method="post" action="/species/create">
+      <Form method="post" action="/species/actions/create">
         <TextInput
           required
           label="Name"

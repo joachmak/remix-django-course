@@ -1,7 +1,7 @@
 import { Link, Outlet, useLoaderData } from "remix";
-import HamsterForm from "~/components/HamsterForm";
+import HamsterForm from "~/components/forms/HamsterForm";
 import { getSpecies } from "~/modules/species";
-import SpeciesForm from "~/components/SpeciesForm";
+import SpeciesForm from "~/components/forms/SpeciesForm";
 import { Grid } from "@mantine/core";
 
 export async function loader() {
