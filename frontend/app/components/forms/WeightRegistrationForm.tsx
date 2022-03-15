@@ -10,14 +10,7 @@ export default function WeightRegistrationForm({
 }) {
   const form = useForm({
     initialValues: {
-      weight_in_grams: 0,
       date: new Date().toDateString(),
-    },
-    validationRules: {
-      weight_in_grams: (value) => value > 0 && value <= 500,
-    },
-    errorMessages: {
-      weight_in_grams: "Vekten må være mellom 0 og 500g",
     },
   });
   return (
@@ -25,13 +18,12 @@ export default function WeightRegistrationForm({
       <Form method="post" action="/weight_records/actions/create">
         <NumberInput
           defaultValue={100}
+          max={500}
+          min={0}
           placeholder="123"
           label="Vekt (g)"
           name="weight_in_grams"
           required
-          hideControls
-          onBlur={() => form.validateField("weight_in_grams")}
-          {...form.getInputProps("weight_in_grams")}
         />
         <DatePicker
           dropdownType="modal"
@@ -39,10 +31,13 @@ export default function WeightRegistrationForm({
           defaultValue={new Date()}
           label="Veiedato"
           name="date"
+          maxDate={new Date()}
           required
         />
         <input type="hidden" name="hamster" value={hamsterId} />
-        <Button type="submit">Submit</Button>
+        <Button style={{ marginTop: 15 }} type="submit">
+          Registrer vekt
+        </Button>
       </Form>
     </>
   );

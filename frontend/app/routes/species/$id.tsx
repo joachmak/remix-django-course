@@ -1,6 +1,6 @@
 import { Button, Divider, Group, Text, useMantineTheme } from "@mantine/core";
 import { Link } from "react-router-dom";
-import { LoaderFunction, useLoaderData } from "remix";
+import { Form, LoaderFunction, useLoaderData } from "remix";
 import invariant from "tiny-invariant";
 import CustomContainer from "~/components/CustomContainer";
 import HeaderText from "~/components/HeaderText";
@@ -35,6 +35,12 @@ export default function SpeciesById() {
         <b>Beskrivelse:</b> "<i>{species.description}</i>"
       </Text>
       <Text>Typisk vekt for denne arten: {species.typical_weight}g</Text>
+      <Form method="delete" action="/species/actions/delete">
+        <input type="hidden" name="id" value={species.id} />
+        <Button type="submit" variant="subtle" color="red">
+          Slett
+        </Button>
+      </Form>
     </CustomContainer>
   );
 }

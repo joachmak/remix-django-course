@@ -76,12 +76,20 @@ export default function HamsterWithId() {
           </Button>
         </Link>
       </Group>
-      <Group grow spacing="sm">
+      <Group
+        grow
+        spacing="sm"
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+        }}
+      >
         <div>
           <Image
             src={hamster.image}
             width={"100%"}
             alt={"Bilde av " + hamster.name}
+            radius="sm"
           />
         </div>
         <div style={{}}>
