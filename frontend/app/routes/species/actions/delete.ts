@@ -16,10 +16,6 @@ const delete_species = async (form_data: FormData) => {
 export const action: ActionFunction = async ({ request }) => {
   // This is called when a POST / PUT / PATCH / DELETE request is sent to this route.
   const form_data = await request.formData();
-  try {
-    await delete_species(form_data);
-    return redirect("/species/");
-  } catch (e) {
-    return redirect("/species/" + form_data.get("id"), 400);
-  }
+  await delete_species(form_data);
+  return redirect("/species/");
 };

@@ -1,4 +1,4 @@
-import { Button, Card, Group, Image, Table, Text } from "@mantine/core";
+import { Button, Group, Image, Table, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { Form, LoaderFunction, useLoaderData } from "remix";
 import invariant from "tiny-invariant";
@@ -62,7 +62,6 @@ function WeightRecordTable({
 
 export default function HamsterWithId() {
   const hamsterData = useLoaderData();
-  console.log(hamsterData);
   const hamster: Hamster = hamsterData.hamster;
   const weightRecords: WeightRecord[] = hamsterData.weight_records;
 
@@ -97,6 +96,8 @@ export default function HamsterWithId() {
           <HeaderText>{hamster.name}</HeaderText>
           <Text size="sm" style={{ lineHeight: 1.5, marginBottom: 15 }}>
             {hamster.description}
+            <br />
+            <b>Høyde:</b> {hamster.height}cm
           </Text>
           <HeaderText>Registrert vekt</HeaderText>
           <WeightRecordTable weightRecords={weightRecords} />

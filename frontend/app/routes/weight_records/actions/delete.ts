@@ -20,10 +20,6 @@ const delete_weight_record = async (form_data: FormData) => {
 export const action: ActionFunction = async ({ request }) => {
   // This is called when a POST / PUT / PATCH / DELETE request is sent to this route.
   const form_data = await request.formData();
-  try {
-    let data = await delete_weight_record(form_data);
-    return redirect("/hamsters/" + form_data.get("hamster_id"));
-  } catch (e) {
-    return redirect("/hamsters/" + form_data.get("hamster_id"), 400);
-  }
+  let data = await delete_weight_record(form_data);
+  return redirect("/hamsters/" + form_data.get("hamster_id"));
 };

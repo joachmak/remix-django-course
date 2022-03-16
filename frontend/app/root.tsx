@@ -5,9 +5,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from "remix";
 import type { MetaFunction } from "remix";
-import { Group, MantineProvider } from "@mantine/core";
+import { Group, MantineProvider, Text } from "@mantine/core";
 import MarginWrapper from "./components/MarginWrapper";
 import Navbar from "./components/Navbar";
 

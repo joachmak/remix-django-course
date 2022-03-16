@@ -36,10 +36,5 @@ const create_weight_record = async (form_data: FormData) => {
 export const action: ActionFunction = async ({ request }) => {
   // This is called when a POST / PUT / PATCH / DELETE request is sent to this route.
   const form_data = await request.formData();
-  try {
-    await create_weight_record(form_data);
-    return redirect("/hamsters/" + form_data.get("hamster")); // Reload current page
-  } catch (e) {
-    return redirect("/hamsters/" + form_data.get("hamster"), 400); // Reload current page with error status
-  }
+  return create_weight_record(form_data);
 };

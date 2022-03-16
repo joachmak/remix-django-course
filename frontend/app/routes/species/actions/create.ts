@@ -20,19 +20,12 @@ const create_species = async (form_data: FormData) => {
       typical_weight: form_data.get("typical_weight"),
     },
   });
-  if (!response.data) {
-    throw new Response(response.statusText, { status: response.status });
-  }
   return response.data.data;
 };
 
 export const action: ActionFunction = async ({ request }) => {
   // This is called when a POST / PUT / PATCH / DELETE request is sent to this route.
   const form_data = await request.formData();
-  try {
-    let data = await create_species(form_data);
-    return redirect("/species/" + data.id); // Redirect to home page
-  } catch (e) {
-    return redirect("/admin/", 400);
-  }
+  let data = await create_species(form_data);
+  return redirect("/species/" + data.id); // Redirect to home page
 };

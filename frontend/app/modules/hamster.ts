@@ -9,9 +9,14 @@ export type Hamster = {
   date_of_birth: Date;
   image: string; // Image URL
   species: Species;
+  height: number;
 };
 
 export async function getHamsters() {
+  /* 
+    We could have also created a loader resource route for this, and
+    used it with useFetcher()! https://remix.run/docs/en/v1/api/remix#usefetcher
+  */
   let response = await axios({
     method: "get",
     url: API_BASE_URL + "/hamsters/",
@@ -24,6 +29,10 @@ export async function getHamsters() {
 }
 
 export async function getHamster(pk: number | string) {
+  /* 
+    We could have also created a loader resource route for this, and
+    used it with useFetcher()! https://remix.run/docs/en/v1/api/remix#usefetcher
+  */
   let response = await axios({
     method: "get",
     url: API_BASE_URL + "/hamsters/" + pk,

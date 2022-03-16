@@ -1,21 +1,17 @@
 import { Button, NumberInput } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
-import { useForm } from "@mantine/hooks";
-import { Form } from "remix";
+import { useFetcher } from "remix";
 
 export default function WeightRegistrationForm({
   hamsterId,
 }: {
   hamsterId: number;
 }) {
-  const form = useForm({
-    initialValues: {
-      date: new Date().toDateString(),
-    },
-  });
+  const fetcher = useFetcher();
   return (
     <>
-      <Form method="post" action="/weight_records/actions/create">
+      {/* We can use fetcher.Form to call the action route without redirecting! */}
+      <fetcher.Form method="post" action="/weight_records/actions/create">
         <NumberInput
           defaultValue={100}
           max={500}
@@ -38,7 +34,7 @@ export default function WeightRegistrationForm({
         <Button style={{ marginTop: 15 }} type="submit">
           Registrer vekt
         </Button>
-      </Form>
+      </fetcher.Form>
     </>
   );
 }
