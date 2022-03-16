@@ -1,6 +1,5 @@
 import { Button, Group, NumberInput, Textarea, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
-import { useState } from "react";
 import { Form } from "remix";
 
 export default function SpeciesForm() {

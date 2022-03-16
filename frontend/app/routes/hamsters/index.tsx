@@ -6,7 +6,7 @@ import {
   Text,
   useMantineTheme,
 } from "@mantine/core";
-import { Link, redirect, useLoaderData } from "remix";
+import { Link, useLoaderData } from "remix";
 import HeaderText from "~/components/HeaderText";
 import { getHamsters, Hamster } from "~/modules/hamster";
 

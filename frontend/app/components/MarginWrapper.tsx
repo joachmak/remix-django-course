@@ -1,4 +1,4 @@
-import { Center, Container, Grid, useMantineTheme } from "@mantine/core";
+import { Center, Grid } from "@mantine/core";
 import { ReactNode } from "react";
 
 export default function MarginWrapper({ children }: { children: ReactNode }) {

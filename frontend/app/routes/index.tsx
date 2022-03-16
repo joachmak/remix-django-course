@@ -1,9 +1,6 @@
-import { Text, Group, useMantineTheme } from "@mantine/core";
-import { Outlet } from "react-router-dom";
+import { Text, useMantineTheme } from "@mantine/core";
 import CustomContainer from "~/components/CustomContainer";
 import HeaderText from "~/components/HeaderText";
-import MarginWrapper from "~/components/MarginWrapper";
-import Navbar from "~/components/Navbar";
 
 export default function Index() {
   const theme = useMantineTheme();
